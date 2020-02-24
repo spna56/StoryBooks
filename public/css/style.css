@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+   .fa-bars{
+    font-size: 25px;
+  }
+  .fa-book{
+    padding:0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  footer{
+    margin-top:20px;
+  }
+
+  .page-footer{
+    padding-bottom: 0em;
+    padding-top: 0em;
+    font-size: 12px;
+   
+  }
+
+  .story-text{
+    line-height:120px;
+  }
+  .dash-status{
+    text-transform:capitalize;
+  }
+
+  #delete-form{
+    display: inline;
+  }
+    

@@ -19,14 +19,15 @@
         <div class="container">
             <div class="wrapper">
                 <a href="/" class="brand-logo center">StoryBooks</a>
-                <a href="#" class="button-collapse show-on large" data-activates="main-menu"><i class="fa fa-bars"></i></a>
+                <a href="#" class="button-collapse show-on large" data-activates="main-menu"><i
+                        class="fa fa-bars"></i></a>
                 <!--Right nav-->
                 <ul class="right hide-on-small-only">
                     <% if(user) { %>
                     <li><a href="/dashboard">Welcome <%=user.firstName%></a></li>
-                    <li><a href="/auth/logout"  style="height:5px"><i class="fa fa-sign-out" style="height:65px"></i> Logout</a></li>
+                    <li><a href="/auth/logout" height="5px"><i class="fa fa-sign-out" height="65px"></i> Logout</a></li>
                     <% }else { %>
-                    <li><a href="/stories" style="height:5px"><i class="fa fa-book" style="height:65px" ></i> Public Stories</a></li>
+                    <li><a href="/stories" height="5px"><i class="fa fa-book" height="65px"></i> Public Stories</a></li>
                     <% } %>
                 </ul>
                 <!--Side Menu-->
@@ -55,23 +56,44 @@
         <a href="/stories/add" class="btn-floating btn-large red "><i class="fa fa-plus"></i></a>
     </div>
     <% } %>
-
-
-
     <main>
         <div class="container">
-            <h1>Welcome</h1>
-            <p>Welcome to StoryBooks 1.0.0</p>
-            <p>Post stories from the best and worst of your life and
-                choose for them to be read by the world or completely
-                private as your own personal diary. </p>
+
+            <h4>Welcome <%=user.firstName %></h4>
+
+            <h4>Your Stories</h4>
             <% if(user){ %>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%  stories.forEach(function(stories){ %>
+                    <tr>
+                        <td><a href="/stories/show/<%=stories.id%>"><%=stories.title %></a></td>
+                        <td><%= moment(stories.date).format('MMMM do YYYY')%></td>
+                        <td><span class="dash-status"><%=stories.status%></span></td>
+                        <td>
+                            <a  class="btn left-align" href="stories/edit/<%=stories.id %>"><i class="fa fa-pencil"></i>Edit</a>
+                            <form action="/stories/<%=stories.id%>?_method=DELETE " method="POST" id="delete-form">
+                                <button type="submit" class="btn red"><i class="fa fa-remove"></i>Delete</button>
+                            </form>
+                        
+                        </td>
+
+                    </tr>
+
+                    <% }) %>
+                </tbody>
+            </table>
 
             <% } else{ %>
-            <a class="btn red 1" href="auth/google"><i class="fa fa-google left"></i>Login With Google</a>
-
-            <% }  %>
-
+            <p>You have not created any stories yet</p>
+            <% } %>
         </div>
     </main>
     <footer class="page-footer grey darken-3">
@@ -98,9 +120,11 @@
             </div>
         </div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.0/js/materialize.min.js"></script>
+
     <script>
         $(document).ready(() => {
             $('.button-collapse').sideNav()

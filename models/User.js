@@ -20,5 +20,7 @@ const UserSchema=new mongoose.Schema({
     image:{
         type:String
     }
-})
+});
+
+//Create Collection and add Schema
 mongoose.model("users",UserSchema)
