@@ -60,7 +60,12 @@
 
       <div class="row">
         <div class="col s12 m9">
-          <h3><%= stories.title %></h3>
+          <h3><%= stories.title %>
+          <small> <% if(user&&stories.user.equals(user.id)){ %>
+            <a href="/stories/edit/<%=stories.id %>" ><i
+                class="fa fa-pencil"></i></a>
+                <% }%></small>
+          </h3>
           <div class="card story">
             <div class="card-content">
               <span class="card-title"><%=moment(stories.date).format('MMMM Do YYYY')%></span>
@@ -93,7 +98,8 @@
                 <h5><%=comments.commentBody%></h5>
                 <div class="chip">
                 <img src="<%=comments.commentUser.image%>"> 
-                  <%=comments.commentUser.firstName%> <%=comments.commentUser.lastName%>
+                <a href="/stories/user/<%=comments.commentUser.id%>">
+                  <%=comments.commentUser.firstName%> <%=comments.commentUser.lastName%> </a>
                 </div>
                 <br>
                 <small>Posted: <%=moment(comments.commentDate).format('MMMM Do YYYY')%></small>
@@ -111,7 +117,7 @@
               <img src="<%=stories.user.image%>" class="circle responsive-img" style="width:135px">
             </div>
             <div class="card-action">
-              <a href="stories/user/stories.user.id">More From <%=stories.user.firstName%></a>
+              <a href="/stories/user/<%=stories.user.id %>">More From <%=stories.user.firstName%></a>
             </div>
           </div>
         </div>
